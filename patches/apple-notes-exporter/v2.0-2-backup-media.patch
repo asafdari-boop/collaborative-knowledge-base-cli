@@ -1,0 +1,85 @@
+diff --git a/Apple Notes Exporter/Apple Notes Exporter/AppleNotesKit/AppleNotesKit.c b/Apple Notes Exporter/Apple Notes Exporter/AppleNotesKit/AppleNotesKit.c
+index 914b1bd..9f3043b 100644
+--- a/Apple Notes Exporter/Apple Notes Exporter/AppleNotesKit/AppleNotesKit.c
++++ b/Apple Notes Exporter/Apple Notes Exporter/AppleNotesKit/AppleNotesKit.c
+@@ -1560,8 +1560,32 @@ uint8_t *ane_fetch_mergeable_data(ane_db *db, const char *identifier,
+ 
+ /* ── File system helpers ───────────────────────────────────── */
+ 
+-static char *_notes_container_path(void)
++static char *_notes_container_path(const ane_db *db)
+ {
++    /*
++     * Resolve attachments beside the database that was opened. This is
++     * essential for read-only exports from a copied Notes container: --db
++     * selects the copied NoteStore.sqlite, so media must come from that same
++     * container rather than from the current user's live Notes library.
++     */
++    if (db && db->db_path && db->db_path[0] != '\0') {
++        char *path = strdup(db->db_path);
++        if (!path) return NULL;
++
++        char *separator = strrchr(path, '/');
++        if (!separator) {
++            free(path);
++            return strdup(".");
++        }
++
++        if (separator == path) {
++            separator[1] = '\0';
++        } else {
++            *separator = '\0';
++        }
++        return path;
++    }
++
+     const char *home = getenv("HOME");
+     if (!home) return NULL;
+ 
+@@ -1705,7 +1729,7 @@ ane_attachment_data *ane_fetch_fallback_image(ane_db *db,
+ {
+     if (!db || !identifier) return NULL;
+ 
+-    char *container = _notes_container_path();
++    char *container = _notes_container_path(db);
+     if (!container) return NULL;
+ 
+     /* Get fallback image generation string */
+@@ -1832,7 +1856,7 @@ ane_attachment_data *ane_fetch_fallback_pdf(ane_db *db,
+ {
+     if (!db || !identifier) return NULL;
+ 
+-    char *container = _notes_container_path();
++    char *container = _notes_container_path(db);
+     if (!container) return NULL;
+ 
+     char *generation = ane_resolve_fallback_pdf_generation(db, identifier);
+@@ -1940,7 +1964,7 @@ static ane_attachment_data *_fetch_media_file(ane_db *db,
+ {
+     if (!db || !media_uuid) return NULL;
+ 
+-    char *container = _notes_container_path();
++    char *container = _notes_container_path(db);
+     if (!container) return NULL;
+ 
+     const char *skip_id = (account_identifier && *account_identifier)
+diff --git a/Apple Notes Exporter/Apple Notes Exporter CLI/CLIExportEngine.swift b/Apple Notes Exporter/Apple Notes Exporter CLI/CLIExportEngine.swift
+index aa91d34..dd45b03 100644
+--- a/Apple Notes Exporter/Apple Notes Exporter CLI/CLIExportEngine.swift
++++ b/Apple Notes Exporter/Apple Notes Exporter CLI/CLIExportEngine.swift
+@@ -45,11 +45,10 @@ actor CLIExportEngine {
+     private var internalLinkMap: [String: String] = [:]
+ 
+     private var maxConcurrentExports: Int {
+-        let coreCount = ProcessInfo.processInfo.processorCount
+-        let totalMemory = ProcessInfo.processInfo.physicalMemory
+-        let totalMemoryGB = Int(ceil(Double(totalMemory) / 1_073_741_824.0))
+-        let memoryLimit = max(1, totalMemoryGB / 2)
+-        return max(1, min(min(coreCount, memoryLimit), 16))
++        // Attachment reads share one Notes repository/database handle. Serial
++        // export avoids intermittent missing-media results under contention and
++        // makes backup completeness deterministic.
++        return 1
+     }
+ 
+     // MARK: - Init

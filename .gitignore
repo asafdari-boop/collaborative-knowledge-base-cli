@@ -1,0 +1,29 @@
+.worktrees/
+dist/
+node_modules/
+.DS_Store
+*.log
+
+# Credentials and machine-local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# CKB runtime state and private knowledge material
+.ckb/
+reminder.md
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+Backups/
+Recovery/
+Knowledge/
+Knowledge-*/
+Notes/
+Sources/
+Attachments/
+Media/
+Transcripts/

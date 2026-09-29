@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "extractor": {
+    "name": "fixture",
+    "version": "1.0.0"
+  },
+  "startedAt": "2026-08-24T00:00:00.000Z",
+  "completedAt": "2026-08-24T00:00:01.000Z",
+  "complete": true,
+  "coverage": {
+    "supportedAccounts": ["iCloud"],
+    "unsupportedAccounts": []
+  },
+  "warnings": [
+    {
+      "code": "inaccessible_note",
+      "message": "One synthetic note is inaccessible.",
+      "noteId": "x-coredata://SYNTHETIC/ICNote/p5"
+    }
+  ],
+  "notes": [
+    {
+      "id": "x-coredata://SYNTHETIC/ICNote/p1",
+      "title": "Frameworks",
+      "accountId": "account-icloud",
+      "accountName": "iCloud",
+      "folderId": "folder-frameworks",
+      "folderName": "Frameworks",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "modifiedAt": "2026-08-23T18:00:00.000Z",
+      "markdownPath": "iCloud/Frameworks/Frameworks.md",
+      "accessibility": "readable",
+      "sensitivity": "permitted",
+      "attachments": [],
+      "internalLinks": [
+        {
+          "href": "../People/Example-Thinker.md",
+          "label": "Example Thinker",
+          "targetNoteId": "x-coredata://SYNTHETIC/ICNote/p2"
+        }
+      ]
+    },
+    {
+      "id": "x-coredata://SYNTHETIC/ICNote/p2",
+      "title": "Example Thinker",
+      "accountId": "account-icloud",
+      "accountName": "iCloud",
+      "folderId": "folder-people",
+      "folderName": "People",
+      "createdAt": "2025-02-01T00:00:00.000Z",
+      "modifiedAt": "2026-08-22T12:00:00.000Z",
+      "markdownPath": "iCloud/People/Example-Thinker.md",
+      "accessibility": "readable",
+      "sensitivity": "permitted",
+      "attachments": [],
+      "internalLinks": []
+    },
+    {
+      "id": "x-coredata://SYNTHETIC/ICNote/p3a",
+      "title": "Duplicate title",
+      "accountId": "account-icloud",
+      "accountName": "iCloud",
+      "folderId": "folder-a",
+      "folderName": "Folder A",
+      "createdAt": "2025-03-01T00:00:00.000Z",
+      "modifiedAt": "2026-08-20T12:00:00.000Z",
+      "markdownPath": "iCloud/Folder A/Duplicate title.md",
+      "accessibility": "readable",
+      "sensitivity": "permitted",
+      "attachments": [],
+      "internalLinks": []
+    },
+    {
+      "id": "x-coredata://SYNTHETIC/ICNote/p3b",
+      "title": "Duplicate title",
+      "accountId": "account-icloud",
+      "accountName": "iCloud",
+      "folderId": "folder-b",
+      "folderName": "Moved Folder",
+      "createdAt": "2025-04-01T00:00:00.000Z",
+      "modifiedAt": "2026-08-21T12:00:00.000Z",
+      "markdownPath": "iCloud/Moved Folder/Duplicate title.md",
+      "accessibility": "readable",
+      "sensitivity": "permitted",
+      "attachments": [],
+      "internalLinks": []
+    },
+    {
+      "id": "x-coredata://SYNTHETIC/ICNote/p4",
+      "title": "Evidence",
+      "accountId": "account-icloud",
+      "accountName": "iCloud",
+      "folderId": "folder-research",
+      "folderName": "Research",
+      "createdAt": "2025-05-01T00:00:00.000Z",
+      "modifiedAt": "2026-08-24T00:00:00.000Z",
+      "markdownPath": "iCloud/Research/Evidence.md",
+      "accessibility": "readable",
+      "sensitivity": "permitted",
+      "attachments": [
+        {
+          "id": "attachment-1",
+          "uti": "public.plain-text",
+          "filename": "evidence.txt",
+          "relativePath": "iCloud/Research/Evidence (Attachments)/evidence.txt",
+          "sizeBytes": 27
+        }
+      ],
+      "internalLinks": []
+    },
+    {
+      "id": "x-coredata://SYNTHETIC/ICNote/p5",
+      "title": "Locked example",
+      "accountId": "account-icloud",
+      "accountName": "iCloud",
+      "folderId": "folder-private",
+      "folderName": "Private",
+      "createdAt": "2025-06-01T00:00:00.000Z",
+      "modifiedAt": "2026-08-19T00:00:00.000Z",
+      "markdownPath": null,
+      "accessibility": "inaccessible",
+      "sensitivity": "permitted",
+      "attachments": [],
+      "internalLinks": []
+    },
+    {
+      "id": "x-coredata://SYNTHETIC/ICNote/p6",
+      "title": "Passwords",
+      "accountId": "account-icloud",
+      "accountName": "iCloud",
+      "folderId": "folder-private",
+      "folderName": "Private",
+      "createdAt": "2025-07-01T00:00:00.000Z",
+      "modifiedAt": "2026-08-18T00:00:00.000Z",
+      "markdownPath": "iCloud/Private/Passwords.md",
+      "accessibility": "readable",
+      "sensitivity": "excluded",
+      "attachments": [],
+      "internalLinks": []
+    }
+  ]
+}

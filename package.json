@@ -1,0 +1,33 @@
+{
+  "name": "collaborative-knowledge-base",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "bin": {
+    "ckb": "./dist/cli/main.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "audit:public": "node scripts/audit-public-tree.mjs"
+  },
+  "dependencies": {
+    "commander": "15.0.0",
+    "diff": "9.0.0",
+    "llm-wiki-compiler": "1.1.0",
+    "node-diff3": "3.2.1",
+    "yaml": "2.9.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "typescript": "7.0.2",
+    "vitest": "4.1.11"
+  }
+}
